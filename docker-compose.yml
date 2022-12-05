@@ -6,7 +6,6 @@ services:
   wireguard:
     image: linuxserver/wireguard
     container_name: wireguard
-    restart: always
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -14,7 +13,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Germany
-      - SERVERURL=<subexample.example.com> #optional
+      - SERVERURL=<example.example.com> #optional
       - SERVERPORT=51820 #optional
       - PEERS=1 #optional
       - PEERDNS=auto #optional
@@ -24,7 +23,8 @@ services:
       - /lib/modules:/lib/modules
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
+    restart: always
     networks:
       - frontend
-#    ports:
-#      - 51820:51820/udp
+    ports:
+      - 51820:51820/udp
